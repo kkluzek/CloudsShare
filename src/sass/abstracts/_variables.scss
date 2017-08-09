@@ -1,0 +1,43 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Lato', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+
+
+
+
+/// base color for layout
+$base-color: #2c2f43 !default;
+
+/// darker version for base color
+/// please don't change
+$dark-base-color: darken( saturate( adjust-hue( $base-color, -1deg ), 2 ), 4 ) !default;
+
+/// accent color
+$accent-color: #90d751 !default;
+
+/// color for background
+$bg-color: #eceef2 !default;
+
+/// Light grey
+$text-color: #6b6d75 !default;
+
+/// darker version of text color
+/// please don't change
+$dark-text-color: darken( desaturate( adjust-hue( $text-color, -128deg ), 2 ), 10 ) !default;
+
+
+
+
