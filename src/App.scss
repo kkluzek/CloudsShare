@@ -19,11 +19,14 @@
 // 4. Layout-related sections
 @import
 'sass/layout/header',
-'sass/layout/footer';
+'sass/layout/footer',
+'sass/layout/menu';
 
 // 5. Components
 @import
-'sass/components/button';
+'sass/components/button',
+'sass/components/menu-header-bar';
+
 
 // 6. Page-specific styles
 @import
