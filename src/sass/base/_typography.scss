@@ -3,5 +3,16 @@
  */
 body {
   color: $text-color;
-  font: normal 125% / 1.4 $text-font-stack;
+  font: 14px / 1.7 $text-font-stack;
 }
+
+h1 {
+  font-size: 1.571em;
+  color: #FFF;
+}
+
+h2 {
+  font-size: 1.786em;
+  color: $bg-color;
+}
+

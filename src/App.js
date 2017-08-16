@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Menu from './js/components/Menu.jsx';
+import Menu from './js/components/Menu';
 
 class App extends Component {
   render() {
