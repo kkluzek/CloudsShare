@@ -2,37 +2,39 @@
 
 // 1. Configuration and helpers
 @import
-'sass/abstracts/variables',
-'sass/abstracts/mixins';
+'scss/abstracts/variables',
+'scss/abstracts/mixins';
 
 // 2. Vendors
 @import
-'sass/vendor/normalize';
+'scss/vendor/normalize';
 
 // 3. Base stuff
 @import
-'sass/base/base',
-'sass/base/fonts',
-'sass/base/typography',
-'sass/base/helpers';
+'scss/base/base',
+'scss/base/fonts',
+'scss/base/typography',
+'scss/base/helpers';
 
 // 4. Layout-related sections
 @import
-'sass/layout/header',
-'sass/layout/footer',
-'sass/layout/menu';
+'scss/layout/header',
+'scss/layout/footer',
+'scss/layout/menu';
 
 // 5. Components
 @import
-'sass/components/button',
-'sass/components/menu-header-bar',
-'sass/components/menu-user-info';
+'scss/components/button',
+'scss/components/menu',
+'scss/components/menu-header-bar',
+'scss/components/menu-user-info',
+'scss/components/menu-list-items';
 
 
 // 6. Page-specific styles
 @import
-'sass/pages/home';
+'scss/pages/home';
 
 // 7. Themes
 @import
-'sass/themes/default';
+'scss/themes/default';

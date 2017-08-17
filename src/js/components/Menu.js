@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MenuHeaderBar from './MenuHeaderBar';
-import MenuUserInfo from './MenuUserInfo'
+import MenuUserInfo from './MenuUserInfo';
+import MenuListItems from './MenuListItems';
 
 export default class Menu extends Component {
     render() {
@@ -8,7 +9,7 @@ export default class Menu extends Component {
             <div className="menu">
                 <MenuHeaderBar />
                 <MenuUserInfo  />
-                {/*<MenuListItem  />*/}
+                <MenuListItems  />
             </div>
         )
     }

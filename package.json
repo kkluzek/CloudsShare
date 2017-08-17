@@ -48,6 +48,7 @@
     "sass-loader": "^6.0.6"
   },
   "scripts": {
+    "prestart": "csscomb ./src/scss/ ",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
