@@ -29,5 +29,9 @@
     color: $text-color;
     font-size: 23px;
     margin-right: 30px;
+    transition: .2s;
+    &:hover {
+      color: $accent-color;
+    }
   }
 }
