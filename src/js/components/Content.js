@@ -1,15 +1,17 @@
 import React, {Component} from "react";
 import FilesPanels from './FilesPanels';
-//import {BrowserRouter, Route, Link} from 'react-router-dom';
+import Settings from "./Settings";
+import {Route} from 'react-router-dom';
+
 
 export default class Content extends Component {
     render(){
         return (
             <div className="content">
-                {/*<BrowserRouter>*/}
-
-                {/*</BrowserRouter>*/}
-                <FilesPanels />
+                    <div>
+                        <Route exact path="/" component={FilesPanels} />
+                        <Route path="/settings" component={Settings} />
+                    </div>
             </div>
         )
     }
