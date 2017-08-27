@@ -1,0 +1,19 @@
+.add-drive{
+  @include box;
+  &__btn {
+    display: flex;
+    align-items: center;
+    &:hover .add-drive__btn-icon {
+      opacity: .6;
+    }
+  }
+  &__btn-text {
+    margin-left: 5px;
+  }
+  &__btn-icon {
+    transition: .2s;
+  }
+  &__btn-remove {
+       transition: .2s;
+  }
+}

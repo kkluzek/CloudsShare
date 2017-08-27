@@ -1,8 +1,8 @@
 .files-panel {
-  @include box(100%, 20px 0);
-  height: 500px;
+  @include box(20px 0);
   overflow-y: auto;
   max-width: calc(33.3333333333333% - 30px);
+  height: 500px;
   width: 100%;
   &__title {
     font-size: 16px;
