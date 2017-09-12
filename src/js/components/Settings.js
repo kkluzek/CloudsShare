@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AddDrive from "./AddDrive";
+import AddDrive from "./AddOneDrive";
 
 export default class Settings extends Component{
     render(){

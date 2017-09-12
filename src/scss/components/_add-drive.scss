@@ -1,4 +1,4 @@
-.add-drive{
+.add-drive {
   @include box;
   &__btn {
     display: flex;
@@ -14,6 +14,6 @@
     transition: .2s;
   }
   &__btn-remove {
-       transition: .2s;
+    transition: .2s;
   }
 }
