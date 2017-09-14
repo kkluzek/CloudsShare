@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import oneDriveIcon from "../../img/One-Drive-icon.png";
 import PropTypes from 'prop-types';
-import * as boundActionCreators from '../actions';
+import {actionAddODToken} from '../actions/OneDriveToken';
 // eslint-disable-next-line t
 import {bindActionCreators} from 'redux';
 // eslint-disable-next-line t
@@ -9,16 +9,13 @@ import {connect} from 'react-redux';
 
 class AddDrive extends Component {
     componentDidMount() {
-
         document.addEventListener("getToken", (e) => {
             let expiration = new Date();
             expiration.setTime(expiration.getTime() + e.detail.expiry * 1000);
             this.props.actionAddODToken(e.detail.token, expiration);
         });
     }
-    componentWillReceiveProps(nextProps){
 
-    }
     handleClick(){
         challengeForAuth();
     }
@@ -29,19 +26,17 @@ class AddDrive extends Component {
             <h3>Add new drive</h3>
             <button onClick={this.handleClick} className="add-drive__btn btn btn-light"><img className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span className="add-drive__btn-text">OneDrive</span>
             </button>
-            <button onClick={() => console.log(this.props.ODTokens)} className="add-drive__btn btn btn-light"><img className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span className="add-drive__btn-text">PROPS</span>
-            </button>
         </div>
         )
     }
 }
 
 function mapStateToProps(state){
-    return {ODTokens: state.ODTokens}
+    return {...state}
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({...boundActionCreators}, dispatch);
+    return bindActionCreators({actionAddODToken}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddDrive);

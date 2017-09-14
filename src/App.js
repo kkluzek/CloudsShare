@@ -4,17 +4,20 @@ import Menu from './js/components/Menu';
 import HeaderBar from './js/components/HeaderBar';
 import Content from './js/components/Content';
 import {BrowserRouter} from 'react-router-dom';
-import {createStore} from  'redux';
 
 import {Provider} from "react-redux";
 import reducers from "./js/reducers";
 
-const Store = createStore(reducers);
+import { createStore, applyMiddleware } from "redux";
+
+import Async from "./js/middlewares/async";
+
+const createStoreWithMiddleware = applyMiddleware(Async)(createStore);
 
 class App extends Component {
   render() {
     return (
-        <Provider store={ Store }>
+        <Provider store={createStoreWithMiddleware(reducers)}>
         <div className="App">
             <HeaderBar />
             <BrowserRouter>

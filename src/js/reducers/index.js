@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import addOneDriveToken from "./addOneDriveToken";
+import OneDrive from "./OneDrive";
 
 const rootReducers = combineReducers({
-    ODTokens: addOneDriveToken
+    OneDrive
 });
 
 export default rootReducers
