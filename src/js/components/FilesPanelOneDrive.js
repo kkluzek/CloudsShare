@@ -8,6 +8,7 @@ class FilesPanel extends Component {
     constructor(props){
         super(props);
         this.state = {previous: "/drive/root"};
+        this.renderFileList = this.renderFileList.bind(this);
     }
 
     getPrevious(previous){
@@ -42,8 +43,14 @@ class FilesPanel extends Component {
         }
     }
     render(){
-        const {token, actionFetchOD} = this.props;
+        const {token, actionFetchOD, data} = this.props;
         const {previous} = this.state;
+        let SearchOrFetch = "";
+        if (this.props.data.children){
+            SearchOrFetch = data.children.map(this.renderFileList);
+        } else {
+            SearchOrFetch = data.value.map(this.renderFileList);
+        }
         return (
             <div className="files-panel">
                 <img className="files-panel__drive-icon" src={oneDriveIcon} alt=""/>
@@ -56,7 +63,7 @@ class FilesPanel extends Component {
                 }}><i className="fa fa-arrow-left" aria-hidden="true"> </i></button>
                 <div className="clearfix"> </div>
                 <ul className="files-panel__list">
-                    { this.props.data.children.map(this.renderFileList.bind(this))}
+                    { SearchOrFetch }
                 </ul>
             </div>
         )

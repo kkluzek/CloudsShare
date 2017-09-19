@@ -15,8 +15,8 @@ export default function (state = {}, action) {
             };
         case FIND_DROPBOX:
             return {
-            ...state,
-            response: action.payload.response
+                 ...state,
+                 response: action.payload.response
             };
     }
     return state;

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {actionFindDB} from "../actions/DropboxFind";
+import {actionFindOD} from "../actions/OneDriveFind";
 
  class SearchBar extends Component {
     constructor(props){
@@ -18,11 +19,11 @@ import {actionFindDB} from "../actions/DropboxFind";
     handleSubmit(event){
         event.preventDefault();
         this.props.actionFindDB(this.props.Dropbox.token, this.state.value);
+        this.props.actionFindOD(this.props.OneDrive.token, this.state.value);
         this.setState({value: ''});
 
     }
     render(){
-        console.log(this.props);
         return (
             <div className="search-bar">
                 <form action="" className="search-bar__form" onSubmit={this.handleSubmit}>
@@ -40,7 +41,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({actionFindDB}, dispatch);
+     return bindActionCreators({actionFindDB, actionFindOD}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
