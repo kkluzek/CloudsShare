@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import googleDriveIcon from "../../img/Google-Drive-icon.png";
+import oneDriveIcon from "../../img/One-Drive-icon.png";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {actionFetchOD} from "../actions/OneDriveFetch"
@@ -21,7 +21,7 @@ class FilesPanel extends Component {
         }
     }
 
-    renderFileList(value, key) {
+    renderFileList(value) {
         const {token, actionFetchOD} = this.props;
         const {name} = value;
         const downloadUrl = value['@microsoft.graph.downloadUrl'];
@@ -29,7 +29,7 @@ class FilesPanel extends Component {
         const encodedName = encodeURIComponent(name);
         const pathToFolder = path + "/" + encodedName;
         if (value.folder) {
-            return <li key={key} onDoubleClick={() => {
+            return <li key={value.id} onDoubleClick={() => {
                 this.setState({
                     previous: this.getPrevious(pathToFolder)
                 });
@@ -37,7 +37,7 @@ class FilesPanel extends Component {
             }} className="files-panel__item">
                 <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i>{value.name}</li>
         } else {
-            return <li key={key} onDoubleClick={() => window.open(downloadUrl)} className="files-panel__item">
+            return <li key={value.id} onDoubleClick={() => window.open(downloadUrl)} className="files-panel__item">
                 <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i>{value.name}</li>
         }
     }
@@ -46,8 +46,8 @@ class FilesPanel extends Component {
         const {previous} = this.state;
         return (
             <div className="files-panel">
-                <img className="files-panel__drive-icon" src={googleDriveIcon} alt=""/>
-                <h2 className="files-panel__title">Google Drive</h2>
+                <img className="files-panel__drive-icon" src={oneDriveIcon} alt=""/>
+                <h2 className="files-panel__title">One Drive</h2>
                 <button onClick={() => {
                     actionFetchOD(token, previous);
                     this.setState({

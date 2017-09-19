@@ -11,7 +11,8 @@ export default class Content extends Component {
                     <div>
                         <Route exact path="/" component={FilesPanels} />
                         <Route path="/settings" component={Settings} />
-                        <Route path="/onedrivecallback" component={OneDriveCallback} />
+                        <Route path="/ODcallback" component={() => (<OneDriveCallback vendor="OneDrive"/>)} />
+                        <Route path="/DBcallback" component={() => (<OneDriveCallback vendor="Dropbox"/>)} />
                     </div>
             </div>
         )

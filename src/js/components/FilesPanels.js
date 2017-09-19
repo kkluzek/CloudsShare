@@ -1,28 +1,41 @@
 import React, {Component} from 'react';
-import FilesPanel from "./FilesPanel";
+import FilesPanelOneDrive from "./FilesPanelOneDrive";
+import FilesPanelDropbox from "./FilesPanelDropbox";
 import {connect} from "react-redux";
 import {actionFetchOD} from "../actions/OneDriveFetch";
+import {actionFetchDB} from "../actions/DropboxFetch";
 import {bindActionCreators} from "redux";
 
 class FilesPanels extends Component {
     componentDidMount(){
-        const {OneDrive} = this.props;
+        const {OneDrive, Dropbox} = this.props;
         if (OneDrive && OneDrive.token) {
             this.props.actionFetchOD(OneDrive.token)
         }
+        if (Dropbox && Dropbox.token) {
+            this.props.actionFetchDB(Dropbox.token)
+        }
     }
 
-    renderFilePanel(){
+    renderODFilePanel(){
         const {OneDrive} = this.props;
         if (OneDrive && OneDrive.response) {
-            return <FilesPanel key="OD" token={OneDrive.token} data={OneDrive.response.data}/>
+            return <FilesPanelOneDrive key="OD"  token={OneDrive.token} data={OneDrive.response.data}/>
+        }
+    }
+
+    renderDBFilePanel(){
+        const {Dropbox} = this.props;
+        if (Dropbox && Dropbox.response) {
+            return <FilesPanelDropbox key="DB"  token={Dropbox.token} data={Dropbox.response}/>
         }
     }
 
     render(){
         return (
             <div className="files-panels">
-                {this.renderFilePanel.call(this)}
+                {this.renderODFilePanel.call(this)}
+                {this.renderDBFilePanel.call(this)}
             </div>
         )
     }
@@ -33,7 +46,7 @@ function mapStateToProps(state) {
 }
 
 function  mapDispatchToProps(dispatch) {
-    return bindActionCreators({actionFetchOD}, dispatch);
+    return bindActionCreators({actionFetchOD, actionFetchDB}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesPanels);

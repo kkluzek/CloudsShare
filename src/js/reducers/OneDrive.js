@@ -7,7 +7,7 @@ export default function(state = [], action){
         return ({
              ...state,
                 token: action.payload.token,
-                expiry: action.payload.expiry,
+                expiry: action.payload.expiry
              });
         case FETCH_ONE_DRIVE:
             return ({

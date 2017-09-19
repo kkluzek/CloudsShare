@@ -15,6 +15,7 @@ export function actionFetchOD(token, path = "/drive/root"){
     });
     return {
         type: FETCH_ONE_DRIVE,
-        payload: request
+        payload: request,
+        middleware: true
     }
 }

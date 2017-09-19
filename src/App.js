@@ -8,11 +8,15 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 import reducers from "./js/reducers";
 
+import utils from "./js/Utils";
+
 import { createStore, applyMiddleware } from "redux";
 
-import Async from "./js/middlewares/async";
+import OneDrive from "./js/middlewares/OneDrive";
+import Dropbox from "./js/middlewares/Dropbox";
+import logger from "redux-logger";
 
-const createStoreWithMiddleware = applyMiddleware(Async)(createStore);
+const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger)(createStore);
 
 class App extends Component {
   render() {
@@ -31,4 +35,6 @@ class App extends Component {
     )
   }
 }
+/// to fire from Authorization popup window
+window.onAuthenticated = utils.onAuthenticated;
 export default App;
