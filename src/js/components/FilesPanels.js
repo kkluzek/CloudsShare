@@ -6,14 +6,16 @@ import {actionFetchOD} from "../actions/OneDriveFetch";
 import {actionFetchDB} from "../actions/DropboxFetch";
 import {bindActionCreators} from "redux";
 
+
 class FilesPanels extends Component {
     componentDidMount(){
         const {OneDrive, Dropbox} = this.props;
-        if (OneDrive && OneDrive.token) {
-            this.props.actionFetchOD(OneDrive.token)
+
+        if ( OneDrive && OneDrive.token && !OneDrive.response) {
+            this.props.actionFetchOD(OneDrive.token);
         }
-        if (Dropbox && Dropbox.token) {
-            this.props.actionFetchDB(Dropbox.token)
+        if ( Dropbox && Dropbox.token && !Dropbox.response) {
+            this.props.actionFetchDB(Dropbox.token);
         }
     }
 
@@ -31,18 +33,26 @@ class FilesPanels extends Component {
         }
     }
 
+    renderNoDiskInfo(){
+        const {OneDrive, Dropbox} = this.props;
+        if (!OneDrive.response && !Dropbox.response){
+            return <h3>No drive found. Please go to settings</h3>
+        }
+    }
+
     render(){
         return (
             <div className="files-panels">
-                {this.renderODFilePanel.call(this)}
-                {this.renderDBFilePanel.call(this)}
+                { this.renderDBFilePanel() }
+                { this.renderODFilePanel() }
+                { this.renderNoDiskInfo() }
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    return {...state}
+    return state
 }
 
 function  mapDispatchToProps(dispatch) {

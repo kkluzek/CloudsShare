@@ -16,12 +16,14 @@ import OneDrive from "./js/middlewares/OneDrive";
 import Dropbox from "./js/middlewares/Dropbox";
 import logger from "redux-logger";
 
-const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger)(createStore);
+import {save, load} from "redux-localstorage-simple";
+
+const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger, save())(createStore);
 
 class App extends Component {
   render() {
     return (
-        <Provider store={createStoreWithMiddleware(reducers)}>
+        <Provider store={createStoreWithMiddleware(reducers, load())}>
         <div className="App">
             <HeaderBar />
             <BrowserRouter>

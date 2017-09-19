@@ -8,6 +8,7 @@ import Dropbox from 'dropbox';
 class FilesPanel extends Component {
     constructor(props){
         super(props);
+        this.renderFileList = this.renderFileList.bind(this);
         this.state = {previous: ""};
     }
 
@@ -35,16 +36,24 @@ class FilesPanel extends Component {
             this.props.actionFetchDB(this.props.token, path)
     }
     renderFileList(value) {
-        if (value['.tag'] === "folder") {
-            return <li key={value.id} onDoubleClick={() => this.openFolder(value.path_lower)}
+        /// value.metadata from search or value from fetch
+        let data = value.metadata || value;
+        if (data['.tag'] === "folder") {
+            return <li key={data.id} onDoubleClick={() => this.openFolder(data.path_lower)}
                        className="files-panel__item">
-                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i>{value.name}</li>
+                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i>{data.name}</li>
         } else {
-            return <li key={value.id} onDoubleClick={() => this.download(value.path_lower)} className="files-panel__item">
-                <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i>{value.name}</li>
+            return <li key={data.id} onDoubleClick={() => this.download(data.path_lower)} className="files-panel__item">
+                <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i>{data.name}</li>
         }
     }
     render(){
+        let SearchOrFetch = null;
+        if (this.props.data.entries){ // fetch data
+            SearchOrFetch = this.props.data.entries.map(this.renderFileList);
+        } else { // else seatch
+            SearchOrFetch = this.props.data.matches.map(this.renderFileList);
+        }
         return (
             <div className="files-panel">
                 <img className="files-panel__drive-icon" src={dropboxIcon} alt=""/>
@@ -59,7 +68,7 @@ class FilesPanel extends Component {
                 }}><i className="fa fa-arrow-left" aria-hidden="true"> </i></button>
                 <div className="clearfix"> </div>
                 <ul className="files-panel__list">
-                    { this.props.data.entries.map(this.renderFileList.bind(this))}
+                    {SearchOrFetch}
                 </ul>
             </div>
         )

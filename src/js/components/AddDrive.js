@@ -37,7 +37,7 @@ class AddDrive extends Component {
 }
 
 function mapStateToProps(state){
-    return {...state}
+    return state
 }
 
 function mapDispatchToProps(dispatch) {
