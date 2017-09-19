@@ -1,0 +1,15 @@
+.menu-user-info {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: $mulled-wine;
+  &__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+  &__name {
+    margin-left: 15px;
+    color: #FFF;
+  }
+}

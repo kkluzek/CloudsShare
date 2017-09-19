@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.btn {
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: solid 1px;
+  outline: none;
+  transition: .2s;
+}
+
+.btn-light {
+  background-color: #FFF;
+  border-color: $mulled-wine;
+  color: $mulled-wine;
+  &:hover {
+    color: $accent-color;
+    border-color: $accent-color;
+  }
+}

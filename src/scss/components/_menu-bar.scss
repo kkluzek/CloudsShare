@@ -1,0 +1,28 @@
+.menu-bar {
+  display: flex;
+  align-items: center;
+  background-color: $ebony-clay;
+  padding: 0 15px;
+  min-width: 215px;
+  width: 215px;
+  &__logo {
+    font-size: 32px;
+    display: inline-block;
+    margin-top: 11px;
+    margin-right: 10px;
+    color: $accent-color;
+  }
+  &__link {
+    text-decoration: none;
+  }
+  &__name {
+    display: inline-block;
+  }
+  &__menu-button {
+    font-size: 20px;
+    margin-left: 20px;
+    border: none;
+    background-color: transparent;
+    color: $french-grey;
+  }
+}

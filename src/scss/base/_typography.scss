@@ -1,0 +1,18 @@
+/**
+ * Basic typography style for copy text
+ */
+body {
+  font: 14px / 1.7 $text-font-stack;
+  color: $text-color;
+}
+
+h1 {
+  font-size: 1.571em;
+  color: #FFF;
+}
+
+h2 {
+  font-size: 1.786em;
+  color: $bg-color;
+  font-weight: 300;
+}
