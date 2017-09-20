@@ -3,7 +3,7 @@ import oneDriveIcon from "../../img/One-Drive-icon.png";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {actionFetchOD} from "../actions/OneDriveFetch"
-
+//TODO przerobić na HOCa
 class FilesPanel extends Component {
     constructor(props){
         super(props);

@@ -18,6 +18,7 @@ import {actionFindOD} from "../actions/OneDriveFind";
 
     handleSubmit(event){
         event.preventDefault();
+        //TODO sprawdzić, czy dyski podączone
         this.props.actionFindDB(this.props.Dropbox.token, this.state.value);
         this.props.actionFindOD(this.props.OneDrive.token, this.state.value);
         this.setState({value: ''});
@@ -27,7 +28,7 @@ import {actionFindOD} from "../actions/OneDriveFind";
         return (
             <div className="search-bar">
                 <form action="" className="search-bar__form" onSubmit={this.handleSubmit}>
-                    <input className="search-bar__input" type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <input className="search-bar__input" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Wyszukaj na dyskach..."/>
                     <button className="search-bar__button">
                         <i className="fa fa-search"> </i>
                     </button>

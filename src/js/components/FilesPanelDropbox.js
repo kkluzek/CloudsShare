@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import {actionFetchDB} from "../actions/DropboxFetch";
 import Dropbox from 'dropbox';
 
+//TODO przerobić na HOCa
 class FilesPanel extends Component {
     constructor(props){
         super(props);
@@ -57,7 +58,12 @@ class FilesPanel extends Component {
         return (
             <div className="files-panel">
                 <img className="files-panel__drive-icon" src={dropboxIcon} alt=""/>
+
                 <h2 className="files-panel__title">Dropbox</h2>
+                {
+                    /* TODO przycisk do home*/
+                }
+                {/* TODO przycisk wylogowania*/}
                 <button onClick={() => {
                     this.props.actionFetchDB(this.props.token);
                     this.setState({

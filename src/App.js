@@ -21,6 +21,7 @@ import {save, load} from "redux-localstorage-simple";
 const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger, save())(createStore);
 
 class App extends Component {
+  //  TODO poprawić warningi
   render() {
     return (
         <Provider store={createStoreWithMiddleware(reducers, load())}>
