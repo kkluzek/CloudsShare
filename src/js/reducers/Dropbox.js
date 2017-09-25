@@ -18,6 +18,6 @@ export default function (state = {}, action) {
                  ...state,
                  response: action.payload.response
             };
+        default: return state;
     }
-    return state;
 }

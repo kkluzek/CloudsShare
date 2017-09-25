@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import FilesPanelOneDrive from "./FilesPanelOneDrive";
-import FilesPanelDropbox from "./FilesPanelDropbox";
+import {OneDriveFilesPanel, DropboxFilesPanel} from "./FilesPanel";
 import {connect} from "react-redux";
 import {actionFetchOD} from "../actions/OneDriveFetch";
 import {actionFetchDB} from "../actions/DropboxFetch";
@@ -22,14 +21,14 @@ class FilesPanels extends Component {
     renderODFilePanel(){
         const {OneDrive} = this.props;
         if (OneDrive && OneDrive.response) {
-            return <FilesPanelOneDrive key="OD"  token={OneDrive.token} data={OneDrive.response.data}/>
+            return <OneDriveFilesPanel key="OD"  token={OneDrive.token} data={OneDrive.response.data}/>;
         }
     }
 
     renderDBFilePanel(){
         const {Dropbox} = this.props;
         if (Dropbox && Dropbox.response) {
-            return <FilesPanelDropbox key="DB"  token={Dropbox.token} data={Dropbox.response}/>
+            return <DropboxFilesPanel key="DB"  token={Dropbox.token} data={Dropbox.response}/>
         }
     }
 
@@ -46,6 +45,8 @@ class FilesPanels extends Component {
                 { this.renderDBFilePanel() }
                 { this.renderODFilePanel() }
                 { this.renderNoDiskInfo() }
+                {/*token={this.props.OneDrive.token} */}
+                {/*<oneDriveFilesPanel key="OD2" token={this.props.OneDrive.token} data={this.props.OneDrive.response.data}/>*/}
             </div>
         )
     }

@@ -1,10 +1,15 @@
 import {FETCH_ONE_DRIVE} from "./types";
 import axios from "axios";
 
-export function actionFetchOD(token, path = "/drive/root"){
+export function actionFetchOD(token, path = "/drive/root") {
+    let trimPath = "";
+    if (path === "/drive/root:" || "" === path || path === "/drive") {
+        trimPath = "/drive/root";
+    } else {
+        trimPath = path;
+    }
     const msGraphApiRoot =  "https://graph.microsoft.com/v1.0/me";
-    const trimPath = path === "/drive/root:" ? "/drive/root" : path;
-    const odurl = msGraphApiRoot +  trimPath;
+    const odurl = msGraphApiRoot +  encodeURIComponent(trimPath);
     const thumbnailSize = "large";
     const odquery = "?expand=thumbnails,children(expand=thumbnails(select=" + thumbnailSize + "))";
 
