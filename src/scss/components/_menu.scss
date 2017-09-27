@@ -1,5 +1,9 @@
 .menu {
-  ;
-  min-width: 245px;
-  max-width: 245px;
+  flex-basis: 245px;
+  transition: ease-in-out .8s;
+  display: flex;
+  flex-direction: column;
+  &--hide {
+    margin-right: -245px;
+  }
 }

@@ -1,32 +1,29 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from "redux";
 import oneDriveHOC from "../HOC/oneDriveHOC";
 import dropboxHOC from "../HOC/dropboxHOC";
 import PropTypes from "prop-types";
 
-//TODO przerobić na HOCa
 const FilesPanel = class extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.renderFileList = this.renderFileList.bind(this);
         this.state = {previous: ""};
     }
 
-    static getPrevious(path){
+    static getPrevious(path) {
         let result = path.split("/");
         result.pop();
         result = result.join("/");
         return result;
     }
 
-    componentWillMount(){
-        if(!this.props._HOC){
+    componentWillMount() {
+        if (!this.props._HOC) {
             throw Error("component 'FilesPanel' require HOC");
         }
     }
 
-    openFolder(path){
+    openFolder(path) {
         this.setState({
             previous: FilesPanel.getPrevious(path)
         });
@@ -44,48 +41,51 @@ const FilesPanel = class extends Component {
 
         if (isFolder) {
             return <li key={id} onDoubleClick={() => this.openFolder(fullPathToFolder)} className="files-panel__item">
-                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i>{name}</li>
+                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i><span>{name}</span></li>
         } else {
             return <li key={id} onDoubleClick={() => downloadFile(downloadUrl)} className="files-panel__item">
-                <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i>{name}</li>
+                <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i><span
+                className="files-panel__label">{name}</span></li>
         }
     }
 
-    render(){
+    render() {
         const {previous} = this.state;
         return (
             <div className="files-panel">
                 <img className="files-panel__drive-icon" src={this.props.icon} alt=""/>
                 <h2 className="files-panel__title">{this.props.title}</h2>
-                {/* TODO add Home button */}
-                {/* TODO Log Out button */}
-                <button onClick={() => this.openFolder(previous)}><i className="fa fa-arrow-left" aria-hidden="true"> </i></button>
+                <div className="files-panel__btns">
+                    <button className="btn btn-light files-panel__btn" onClick={() => this.openFolder(previous)}><i
+                        className="fa fa-arrow-left" aria-hidden="true"> </i></button>
+                    <button className="btn btn-light files-panel__btn" onClick={() => this.openFolder("")}><i
+                        className="fa fa-home" aria-hidden="true"> </i></button>
+                    <button className="btn btn-light files-panel__btn" onClick={() => this.props.logout()}><i
+                        className="fa fa-ban" aria-hidden="true"> </i></button>
+
+                </div>
                 <div className="clearfix"> </div>
                 <ul className="files-panel__list">
-                    { this.props.data.map(this.renderFileList) }
+                    {this.props.data.map(this.renderFileList)}
                 </ul>
             </div>
         )
     }
 };
 
-
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({}, dispatch)
-}
-
 FilesPanel.propTypes = {
+    _HOC: PropTypes.bool.isRequired,
     icon: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    fetchData: PropTypes.func.isRequired,
-    data: PropTypes.array.isRequired,
-    _HOC: PropTypes.bool.isRequired,
-    fullPathToFolder: PropTypes.func.isRequired,
-    isFolder: PropTypes.func.isRequired,
-    downloadFile: PropTypes.func.isRequired,
     downloadValue: PropTypes.string.isRequired,
-    extractData: PropTypes.func.isRequired
+    data: PropTypes.array.isRequired,
+    fullPathToFolder: PropTypes.func.isRequired,
+    fetchData: PropTypes.func.isRequired,
+    downloadFile: PropTypes.func.isRequired,
+    isFolder: PropTypes.func.isRequired,
+    extractData: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired
 };
 
-export const OneDriveFilesPanel = oneDriveHOC(connect(undefined, mapDispatchToProps)(FilesPanel));
-export const DropboxFilesPanel = dropboxHOC(connect(undefined, mapDispatchToProps)(FilesPanel));
+export const OneDriveFilesPanel = oneDriveHOC(FilesPanel);
+export const DropboxFilesPanel = dropboxHOC(FilesPanel);

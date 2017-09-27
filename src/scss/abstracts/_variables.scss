@@ -2,10 +2,6 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-
-
-
-
 /// Regular font family
 /// @type List
 $text-font-stack: 'Lato', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
@@ -14,17 +10,13 @@ $text-font-stack: 'Lato', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica',
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
 
-
-
-
-
 /// base color for layout
 $base-color: #2C2F43 !default;
 
 /// darker version for base color
 /// please don't change
 /// default #232638
-$dark-base-color: darken( saturate( adjust-hue( $base-color, -1deg ), 2 ), 4 ) !default;
+$dark-base-color: darken(saturate(adjust-hue($base-color, -1deg), 2), 4) !default;
 
 /// accent color
 $accent-color: #90D751 !default;
@@ -46,4 +38,4 @@ $ebony-clay: #232638 !default;
 
 /// darker version of text color
 /// please don't change
-$dark-text-color: darken( desaturate( adjust-hue( $text-color, -128deg ), 2 ), 10 ) !default;
+$dark-text-color: darken(desaturate(adjust-hue($text-color, -128deg), 2), 10) !default;

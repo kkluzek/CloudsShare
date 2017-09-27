@@ -1,7 +1,7 @@
-import {ADD_DROPBOX_TOKEN, FETCH_DROPBOX, FIND_DROPBOX} from "../actions/types";
+import {ADD_DROPBOX_TOKEN, FETCH_DROPBOX, FIND_DROPBOX, LOGOUT_DROPBOX} from "../actions/types";
 
 export default function (state = {}, action) {
-    switch (action.type){
+    switch (action.type) {
         case ADD_DROPBOX_TOKEN:
             return {
                 ...state,
@@ -15,9 +15,12 @@ export default function (state = {}, action) {
             };
         case FIND_DROPBOX:
             return {
-                 ...state,
-                 response: action.payload.response
+                ...state,
+                response: action.payload.response
             };
-        default: return state;
+        case LOGOUT_DROPBOX:
+            return {};
+        default:
+            return state;
     }
 }

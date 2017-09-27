@@ -3,38 +3,37 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {actionFetchOD} from "../actions/OneDriveFetch";
 import oneDriveIcon from "../../img/One-Drive-icon.png";
+import oneDriveLogout from "../actions/OneDriveLogout";
 
 
-function oneDriveHOC(WrappedComponent){
-    class OneDrive extends Component{
+function oneDriveHOC(WrappedComponent) {
+    class OneDrive extends Component {
+        static downloadFile(downloadUrl) {
+            window.open(downloadUrl);
+        }
 
+        static fullPathToFolder(data) {
+            return data.parentReference.path + "/" + data.name;
+        }
 
-        searchOrFetch(){
+        static isFolder(data) {
+            return data.folder;
+        }
+
+        static extractData(value) {
+            return value;
+        }
+
+        searchOrFetch() {
             const {data} = this.props;
-            if (data.children){
+            if (data.children) {
                 return data.children;
             } else {
                 return data.value;
             }
         }
 
-        static downloadFile(downloadUrl){
-            window.open(downloadUrl);
-        }
-
-        static fullPathToFolder(data){
-            return data.parentReference.path +"/" + data.name;
-        }
-
-        static isFolder(data){
-            return data.folder;
-        }
-
-        static extractData(value){
-            return value;
-        }
-
-        render(){
+        render() {
             const newProps = {};
             newProps.fetchData = this.props.actionFetchOD;
             newProps.data = this.searchOrFetch();
@@ -46,18 +45,21 @@ function oneDriveHOC(WrappedComponent){
             newProps.isFolder = OneDrive.isFolder;
             newProps.extractData = OneDrive.extractData;
             newProps.downloadValue = "@microsoft.graph.downloadUrl";
+            newProps.logout = this.props.oneDriveLogout;
             return (
                 <WrappedComponent {...this.props} {...newProps}/>
             )
         }
     }
-    function mapStateToProps(state){
+
+    function mapStateToProps(state) {
         return state;
     }
 
     function mapDispatchToProps(dispatch) {
-        return bindActionCreators({actionFetchOD}, dispatch)
+        return bindActionCreators({actionFetchOD, oneDriveLogout}, dispatch)
     }
+
     return connect(mapStateToProps, mapDispatchToProps)(OneDrive);
 }
 

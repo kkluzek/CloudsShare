@@ -4,27 +4,38 @@ import {bindActionCreators} from "redux";
 import dropboxIcon from "../../img/Dropbox-icon.png";
 import {actionFetchDB} from "../actions/DropboxFetch";
 import DropboxSDK from 'dropbox';
-
+import dropboxLogout from "../actions/DropboxLogout";
 
 
 function dropboxHOC(WrappedComponent) {
-    class Dropbox extends Component{
-        constructor(props){
+    class Dropbox extends Component {
+        constructor(props) {
             super(props);
             this.downloadFile = this.downloadFile.bind(this);
         }
-        searchOrFetch(){
+
+        static fullPathToFolder(data) {
+            return data.path_lower;
+        }
+
+        static isFolder(data) {
+            return data['.tag'] === "folder";
+        }
+
+        static extractData(value) {
+            return value.metadata || value;
+        }
+
+        searchOrFetch() {
             const {data} = this.props;
-            if (data.entries){ // fetch data
+            if (data.entries) { // fetch data
                 return data.entries;
             } else { // else search
                 return data.matches;
             }
         }
 
-
-
-        downloadFile(path){
+        downloadFile(path) {
             const dbx = new DropboxSDK({accessToken: this.props.token});
             const request = dbx.filesDownload({path});
             request.then((response) => {
@@ -33,20 +44,9 @@ function dropboxHOC(WrappedComponent) {
             });
         }
 
-        static fullPathToFolder(data){
-            return data.path_lower;
-        }
-        static isFolder(data){
-            return data['.tag'] === "folder";
-        }
-
-        static extractData(value){
-            return value.metadata || value;
-        }
-
-        render(){
+        render() {
             const newProps = {};
-            newProps.icon =  dropboxIcon;
+            newProps.icon = dropboxIcon;
             newProps.title = "Dropbox";
             newProps.fetchData = this.props.actionFetchDB;
             newProps.data = this.searchOrFetch();
@@ -56,16 +56,19 @@ function dropboxHOC(WrappedComponent) {
             newProps.downloadFile = this.downloadFile;
             newProps.downloadValue = "path_lower";
             newProps.extractData = Dropbox.extractData;
-            return  <WrappedComponent {...this.props} {...newProps}/>
+            newProps.logout = this.props.dropboxLogout;
+            return <WrappedComponent {...this.props} {...newProps}/>
         }
     }
 
     function mapStateToProps(state) {
         return state;
     }
-    function mapDispatchToProps(dispatch){
-        return bindActionCreators({actionFetchDB}, dispatch);
+
+    function mapDispatchToProps(dispatch) {
+        return bindActionCreators({actionFetchDB, dropboxLogout}, dispatch);
     }
+
     return connect(mapStateToProps, mapDispatchToProps)(Dropbox)
 }
 

@@ -1,6 +1,5 @@
 .files-panels {
   display: flex;
-  align-items: stretch;
+  height: calc(100% - 30px);
   padding: 15px;
-  flex-wrap: wrap;
 }

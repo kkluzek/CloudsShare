@@ -8,6 +8,7 @@ import {bindActionCreators} from 'redux';
 // eslint-disable-next-line t
 import {connect} from 'react-redux';
 import utils from "../Utils";
+
 const year = 31536000;//seconds
 
 class AddDrive extends Component {
@@ -24,19 +25,23 @@ class AddDrive extends Component {
     }
 
 
-    render(){
+    render() {
         return (
-            <div>
-                <button onClick={() => utils.challengeForAuth("OneDrive")} className="add-drive__btn btn btn-light"><img className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span className="add-drive__btn-text">OneDrive</span>
+            <div className="add-drive__btns">
+                <button onClick={() => utils.challengeForAuth("OneDrive")} className="add-drive__btn btn btn-light"><img
+                    className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span
+                    className="add-drive__btn-text">OneDrive</span>
                 </button>
-                <button onClick={() => utils.challengeForAuth("Dropbox")} className="add-drive__btn btn btn-light"><img className="add-drive__btn-icon" src={dropboxIcon} alt="OneDrive Icon"/><span className="add-drive__btn-text">Dropbox</span>
+                <button onClick={() => utils.challengeForAuth("Dropbox")} className="add-drive__btn btn btn-light"><img
+                    className="add-drive__btn-icon" src={dropboxIcon} alt="OneDrive Icon"/><span
+                    className="add-drive__btn-text">Dropbox</span>
                 </button>
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return state
 }
 

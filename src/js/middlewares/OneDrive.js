@@ -1,5 +1,4 @@
-import {FETCH_ONE_DRIVE} from "../actions/types";
-import {FIND_ONE_DRIVE} from "../actions/types";
+import {FETCH_ONE_DRIVE, FIND_ONE_DRIVE, LOGOUT_ONE_DRIVE} from "../actions/types";
 
 export default function({dispatch}) {
     return next => action => {
@@ -11,7 +10,12 @@ export default function({dispatch}) {
         }
         action.payload
             .then(response => {
-                const newAction = { ...action, payload: {response}, middleware: false};
+                const newAction = {...action, payload: {response}, middleware: false};
+                dispatch(newAction);
+            })
+            .catch(error => {
+                alert("OneDrive: ",error);
+                const newAction = {type: LOGOUT_ONE_DRIVE};
                 dispatch(newAction);
             })
     }

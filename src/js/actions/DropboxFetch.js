@@ -4,7 +4,7 @@ import Dropbox from "dropbox";
 
 export function actionFetchDB(token, path = "") {
     const dbx = new Dropbox({accessToken: token});
-    let request =dbx.filesListFolder({path: path});
+    let request = dbx.filesListFolder({path: path});
     return {
         type: FETCH_DROPBOX,
         payload: request,

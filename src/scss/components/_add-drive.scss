@@ -1,6 +1,10 @@
 .add-drive {
   @include box;
+  &__btns {
+    display: flex;
+  }
   &__btn {
+    margin-right: 10px;
     display: flex;
     align-items: center;
     &:hover .add-drive__btn-icon {

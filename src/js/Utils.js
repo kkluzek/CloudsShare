@@ -1,68 +1,67 @@
-import PropTypes from 'prop-types';
-
 let utils = {};
 let location = window.location;
 
-utils.onAuthenticated =  function(options) {
+utils.onAuthenticated = function (options) {
     if (options.token) {
         options.window.close();
         /// event send to AddDrive.componentDidMount
-        let tokenGot = new CustomEvent(options.type,{ detail: {...options}});
+        let tokenGot = new CustomEvent(options.type, {detail: {...options}});
         document.dispatchEvent(tokenGot);
     }
 };
 
-utils.getAuthInfoFromUrl = function() {
+utils.getAuthInfoFromUrl = function () {
     if (window.location.hash) {
         let authResponse = window.location.hash.substring(1);
-        let authInfo = JSON.parse(
-            '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0,-1) + '}',
-            function(key, value) { return key === "" ? value : decodeURIComponent(value); });
-        return authInfo;
+        return JSON.parse(
+            '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0, -1) + '}',
+            function (key, value) {
+                return key === "" ? value : decodeURIComponent(value);
+            });
     }
     else {
         alert("failed to receive auth token");
     }
 };
 
-utils.onAuthCallback = function(type){
+utils.onAuthCallback = function (type) {
     let options = {};
     let authInfo = getAuthInfoFromUrl();
     options.token = authInfo["access_token"];
     options.expiry = parseInt(authInfo["expires_in"], 10);
     options.type = type;
     options.window = window;
-    if (options.token)
-    {
+    if (options.token) {
         window.opener.onAuthenticated(options);
     }
+
     function getAuthInfoFromUrl() {
         if (window.location.hash) {
             let authResponse = window.location.hash.substring(1);
-            let authInfo = JSON.parse(
-                '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0,-1) + '}',
-                function(key, value) { return key === "" ? value : decodeURIComponent(value); });
-            return authInfo;
+            return JSON.parse(
+                '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0, -1) + '}',
+                function (key, value) {
+                    return key === "" ? value : decodeURIComponent(value);
+                });
         }
         else {
             alert("failed to receive auth token");
         }
     }
-}
+};
 
 
-
-utils.challengeForAuth = function(type = "Error") {
+utils.challengeForAuth = function (type = "Error") {
     let appOneDriveInfo = {
         clientId: "144a6c1e-ef29-4128-972f-a3acb7b43da6",
-        redirectUri: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+"/ODcallback",
+        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/ODcallback",
         scopes: "user.read files.read files.read.all sites.read.all",
         authServiceUri: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
     };
 
     let appDropboxInfo = {
         authServiceUri: "https://www.dropbox.com/oauth2/authorize",
-        redirectUri: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+"/DBcallback",
+        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/DBcallback",
         clientId: "ph4wr4t62mh20rw",
     };
 
@@ -84,7 +83,7 @@ utils.challengeForAuth = function(type = "Error") {
         "&redirect_uri=" + encodeURIComponent(appDropboxInfo.redirectUri);
 
     let url;
-    switch(type) {
+    switch (type) {
         case "Dropbox":
             url = urlDropbox;
             break;
@@ -124,14 +123,8 @@ utils.challengeForAuth = function(type = "Error") {
 
         popup.focus();
     }
-    popup(url);
-}
 
-utils.challengeForAuth.propTypes = {
-    clientId: PropTypes.string.isRequired,
-    redirectUri: PropTypes.string.isRequired,
-    scopes: PropTypes.string,
-    authServiceUri: PropTypes.string.isRequired
-}
+    popup(url);
+};
 
 export default utils;

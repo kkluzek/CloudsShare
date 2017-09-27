@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.scss';
 import Menu from './js/components/Menu';
 import HeaderBar from './js/components/HeaderBar';
@@ -10,34 +10,36 @@ import reducers from "./js/reducers";
 
 import utils from "./js/Utils";
 
-import { createStore, applyMiddleware } from "redux";
+import {applyMiddleware, createStore} from "redux";
 
 import OneDrive from "./js/middlewares/OneDrive";
 import Dropbox from "./js/middlewares/Dropbox";
 import logger from "redux-logger";
 
-import {save, load} from "redux-localstorage-simple";
+import {load, save} from "redux-localstorage-simple";
 
 const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger, save())(createStore);
 
 class App extends Component {
-  //  TODO poprawić warningi
-  render() {
-    return (
-        <Provider store={createStoreWithMiddleware(reducers, load())}>
-        <div className="App">
-            <HeaderBar />
-            <BrowserRouter>
-                <div className="body">
-                    <Menu />
-                    <Content />
+    // TODO refaktoryzacja
+    // TODO Dodać PropTypes do Cmponentów
+    render() {
+        return (
+            <Provider store={createStoreWithMiddleware(reducers, load())}>
+                <div className="App">
+                    <HeaderBar/>
+                    <BrowserRouter>
+                        <div className="body">
+                            <Menu/>
+                            <Content/>
+                        </div>
+                    </BrowserRouter>
                 </div>
-            </BrowserRouter>
-        </div>
-        </Provider>
-    )
-  }
+            </Provider>
+        )
+    }
 }
+
 /// to fire from Authorization popup window
 window.onAuthenticated = utils.onAuthenticated;
 export default App;

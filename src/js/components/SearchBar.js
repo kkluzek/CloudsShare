@@ -4,31 +4,43 @@ import {connect} from "react-redux";
 import {actionFindDB} from "../actions/DropboxFind";
 import {actionFindOD} from "../actions/OneDriveFind";
 
- class SearchBar extends Component {
-    constructor(props){
+class SearchBar extends Component {
+    constructor(props) {
         super(props);
         this.state = {value: ""};
 
-         this.handleChange = this.handleChange.bind(this);
-         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(event){
+
+    static isEmpty(obj) {
+        return Object.keys(obj).length === 0 || obj === null || obj === undefined
+    }
+
+    handleChange(event) {
         this.setState({value: event.target.value})
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault();
-        //TODO sprawdzić, czy dyski podączone
-        this.props.actionFindDB(this.props.Dropbox.token, this.state.value);
-        this.props.actionFindOD(this.props.OneDrive.token, this.state.value);
+        const {OneDrive, Dropbox} = this.props;
+        if (!SearchBar.isEmpty(Dropbox)) {
+            this.props.actionFindDB(this.props.Dropbox.token, this.state.value);
+        }
+        if (!SearchBar.isEmpty(OneDrive)) {
+            this.props.actionFindOD(this.props.OneDrive.token, this.state.value);
+        }
+
         this.setState({value: ''});
 
     }
-    render(){
+
+    render() {
         return (
             <div className="search-bar">
                 <form action="" className="search-bar__form" onSubmit={this.handleSubmit}>
-                    <input className="search-bar__input" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Wyszukaj na dyskach..."/>
+                    <input className="search-bar__input" type="text" value={this.state.value}
+                           onChange={this.handleChange} placeholder="Wyszukaj na dyskach..."/>
                     <button className="search-bar__button">
                         <i className="fa fa-search"> </i>
                     </button>
@@ -37,12 +49,13 @@ import {actionFindOD} from "../actions/OneDriveFind";
         )
     }
 }
+
 function mapStateToProps(state) {
-     return state;
+    return state;
 }
 
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({actionFindDB, actionFindOD}, dispatch);
+    return bindActionCreators({actionFindDB, actionFindOD}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

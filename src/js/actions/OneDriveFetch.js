@@ -8,15 +8,15 @@ export function actionFetchOD(token, path = "/drive/root") {
     } else {
         trimPath = path;
     }
-    const msGraphApiRoot =  "https://graph.microsoft.com/v1.0/me";
-    const odurl = msGraphApiRoot +  encodeURIComponent(trimPath);
+    const msGraphApiRoot = "https://graph.microsoft.com/v1.0/me";
+    const odurl = msGraphApiRoot + encodeURIComponent(trimPath);
     const thumbnailSize = "large";
     const odquery = "?expand=thumbnails,children(expand=thumbnails(select=" + thumbnailSize + "))";
 
     const request = axios({
-        method:'get',
+        method: 'get',
         url: odurl + odquery,
-        headers: { "Authorization": "Bearer " + token }
+        headers: {"Authorization": "Bearer " + token}
     });
     return {
         type: FETCH_ONE_DRIVE,

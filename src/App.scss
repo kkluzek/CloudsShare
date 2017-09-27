@@ -1,30 +1,26 @@
 @charset "UTF-8";
 
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 // 1. Configuration and helpers
-@import
-'scss/abstracts/variables',
+@import 'scss/abstracts/variables',
 'scss/abstracts/mixins';
 
 // 2. Vendors
-@import
-'scss/vendor/normalize';
+@import 'scss/vendor/normalize';
 
 // 3. Base stuff
-@import
-'scss/base/base',
+@import 'scss/base/base',
 'scss/base/fonts',
 'scss/base/typography',
 'scss/base/helpers';
 
-// 4. Layout-related sections
-@import
-'scss/layout/header',
-'scss/layout/footer',
-'scss/layout/menu';
-
-// 5. Components
-@import
-'scss/components/button',
+// 4. Components
+@import 'scss/components/button',
 'scss/components/body',
 'scss/components/header-bar',
 'scss/components/menu',
@@ -38,11 +34,3 @@
 'scss/components/add-drive';
 
 
-
-// 6. Page-specific styles
-@import
-'scss/pages/home';
-
-// 7. Themes
-@import
-'scss/themes/default';
