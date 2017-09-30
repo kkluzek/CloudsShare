@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import dropboxIcon from "../../img/Dropbox-icon.png";
-import {actionFetchDB} from "../actions/DropboxFetch";
+import {dropboxFetchFiles} from "../actions/dropboxFetchFiles";
 import DropboxSDK from 'dropbox';
-import dropboxLogout from "../actions/DropboxLogout";
+import dropboxLogout from "../actions/dropboxLogout";
 
 
 function dropboxHOC(WrappedComponent) {
@@ -66,7 +66,7 @@ function dropboxHOC(WrappedComponent) {
     }
 
     function mapDispatchToProps(dispatch) {
-        return bindActionCreators({actionFetchDB, dropboxLogout}, dispatch);
+        return bindActionCreators({actionFetchDB: dropboxFetchFiles, dropboxLogout}, dispatch);
     }
 
     return connect(mapStateToProps, mapDispatchToProps)(Dropbox)

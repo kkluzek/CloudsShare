@@ -1,7 +1,7 @@
 import {FETCH_ONE_DRIVE} from "./types";
 import axios from "axios";
 
-export function actionFetchOD(token, path = "/drive/root") {
+export function oneDriveFetchFiles(token, path = "/drive/root") {
     let trimPath = "";
     if (path === "/drive/root:" || "" === path || path === "/drive") {
         trimPath = "/drive/root";

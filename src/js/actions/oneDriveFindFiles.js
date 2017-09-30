@@ -1,7 +1,7 @@
 import {FIND_ONE_DRIVE} from "./types";
 import axios from 'axios';
 
-export function actionFindOD(token, query = "") {
+export function oneDriveFindFiles(token, query = "") {
     const msGraphApiRoot = "https://graph.microsoft.com/v1.0/me/";
     const path = "drive/root/";
     const command = "search(q='" + query + "')";

@@ -1,3 +1,7 @@
 .header-bar {
   display: flex;
+  position: relative;
+  @media(max-width: $size-xs) {
+    flex-wrap: wrap;
+  }
 }

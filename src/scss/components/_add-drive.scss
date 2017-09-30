@@ -1,12 +1,17 @@
 .add-drive {
   @include box;
+  &__label {
+    margin-left: 10px;
+  }
   &__btns {
     display: flex;
+    flex-wrap: wrap;
   }
   &__btn {
-    margin-right: 10px;
+    margin: 5px 10px;
     display: flex;
     align-items: center;
+    min-width: 132px;
     &:hover .add-drive__btn-icon {
       opacity: .6;
     }

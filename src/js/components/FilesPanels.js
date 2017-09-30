@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import {DropboxFilesPanel, OneDriveFilesPanel} from "./FilesPanel";
 import {connect} from "react-redux";
-import {actionFetchOD} from "../actions/OneDriveFetch";
-import {actionFetchDB} from "../actions/DropboxFetch";
+import {oneDriveFetchFiles} from "../actions/oneDriveFetchFiles";
+import {dropboxFetchFiles} from "../actions/dropboxFetchFiles";
 import {bindActionCreators} from "redux";
+import {isEmptyObj} from "../Utils";
 
 
 class FilesPanels extends Component {
-    static isEmpty(obj) {
-        return Object.keys(obj).length === 0 || obj === null || obj === undefined
-    }
-
     componentDidMount() {
         const {OneDrive, Dropbox} = this.props;
 
@@ -38,14 +35,14 @@ class FilesPanels extends Component {
 
     renderNoDiskInfo() {
         const {OneDrive, Dropbox} = this.props;
-        if (FilesPanels.isEmpty(OneDrive) && FilesPanels.isEmpty(Dropbox)) {
+        if (isEmptyObj(OneDrive) && isEmptyObj(Dropbox)) {
             return <h3>No drive found. Please go to settings</h3>
         }
     }
 
     render() {
         return (
-            <div className="files-panels">
+            <div id="files-panels" className="files-panels">
                 {this.renderDBFilePanel()}
                 {this.renderODFilePanel()}
                 {this.renderNoDiskInfo()}
@@ -59,7 +56,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({actionFetchOD, actionFetchDB}, dispatch);
+    return bindActionCreators({actionFetchOD: oneDriveFetchFiles, actionFetchDB: dropboxFetchFiles}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesPanels);

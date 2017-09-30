@@ -1,6 +1,14 @@
 .content {
   background-color: $bg-color;
-  width: 100%;
-  padding: 15px;
+  width: calc(100% - 30px);
   flex: 1;
+  padding: 15px;
+  min-width: 0; //for files-panel__label truncate
+  transition: ease-in-out 1s;
+
+  &--menu-hide {
+    @media (max-width: $size-xs) {
+      margin-right: -100%;
+    }
+  }
 }

@@ -14,7 +14,8 @@ export default function({dispatch}) {
                 dispatch(newAction);
             })
             .catch(error => {
-                alert("OneDrive: ",error);
+                console.log(error);
+                alert("OneDrive: Error, please open the console to see details");
                 const newAction = {type: LOGOUT_ONE_DRIVE};
                 dispatch(newAction);
             })

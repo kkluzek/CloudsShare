@@ -12,7 +12,8 @@ export default function ({dispatch}) {
                 dispatch(newAction);
             })
             .catch(error => {
-                alert("Dropbox error: ", error);
+                console.log(error);
+                alert("Dropbox: Error, please open the console to see details");
                 const newAction = {type: LOGOUT_DROPBOX};
                 dispatch(newAction);
             })

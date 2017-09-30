@@ -1,9 +1,16 @@
 .menu {
-  flex-basis: 245px;
-  transition: ease-in-out .8s;
+  width: 245px;
+  transition: ease-in-out 1s;
   display: flex;
   flex-direction: column;
+  min-width: 245px;
+  @media (max-width: $size-xs) {
+    width: 100%;
+  }
   &--hide {
     margin-right: -245px;
+    @media (max-width: $size-xs) {
+      margin-right: -100%;
+    }
   }
 }

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {actionFetchOD} from "../actions/OneDriveFetch";
+import {oneDriveFetchFiles} from "../actions/oneDriveFetchFiles";
 import oneDriveIcon from "../../img/One-Drive-icon.png";
-import oneDriveLogout from "../actions/OneDriveLogout";
+import oneDriveLogout from "../actions/oneDriveLogout";
 
 
 function oneDriveHOC(WrappedComponent) {
@@ -57,7 +57,7 @@ function oneDriveHOC(WrappedComponent) {
     }
 
     function mapDispatchToProps(dispatch) {
-        return bindActionCreators({actionFetchOD, oneDriveLogout}, dispatch)
+        return bindActionCreators({actionFetchOD: oneDriveFetchFiles, oneDriveLogout}, dispatch)
     }
 
     return connect(mapStateToProps, mapDispatchToProps)(OneDrive);

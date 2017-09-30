@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {actionFindDB} from "../actions/DropboxFind";
-import {actionFindOD} from "../actions/OneDriveFind";
+import {dropboxFindFiles} from "../actions/dropboxFindFiles";
+import {oneDriveFindFiles} from "../actions/oneDriveFindFiles";
 
 class SearchBar extends Component {
     constructor(props) {
@@ -55,7 +55,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({actionFindDB, actionFindOD}, dispatch);
+    return bindActionCreators({actionFindDB: dropboxFindFiles, actionFindOD: oneDriveFindFiles}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

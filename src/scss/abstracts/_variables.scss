@@ -39,3 +39,7 @@ $ebony-clay: #232638 !default;
 /// darker version of text color
 /// please don't change
 $dark-text-color: darken(desaturate(adjust-hue($text-color, -128deg), 2), 10) !default;
+$size-xs: 575px;
+$size-sm: 767px;
+$size-md: 991px;
+$size-lg: 1199px;

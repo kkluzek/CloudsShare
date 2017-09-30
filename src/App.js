@@ -8,7 +8,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 import reducers from "./js/reducers";
 
-import utils from "./js/Utils";
+import {onAuthenticated} from "./js/Utils";
 
 import {applyMiddleware, createStore} from "redux";
 
@@ -21,12 +21,10 @@ import {load, save} from "redux-localstorage-simple";
 const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger, save())(createStore);
 
 class App extends Component {
-    // TODO refaktoryzacja
-    // TODO Dodać PropTypes do Cmponentów
     render() {
         return (
             <Provider store={createStoreWithMiddleware(reducers, load())}>
-                <div className="App">
+                <div id="App">
                     <HeaderBar/>
                     <BrowserRouter>
                         <div className="body">
@@ -41,5 +39,5 @@ class App extends Component {
 }
 
 /// to fire from Authorization popup window
-window.onAuthenticated = utils.onAuthenticated;
+window.onAuthenticated = onAuthenticated;
 export default App;

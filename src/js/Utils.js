@@ -1,7 +1,17 @@
-let utils = {};
-let location = window.location;
+const {location} = window;
 
-utils.onAuthenticated = function (options) {
+export const toggleMenu = function() {
+    document.getElementById("menu").classList.toggle("menu--hide");
+    document.getElementById("content").classList.toggle("content--menu-hide");
+    document.getElementById("files-panels") && document.getElementById("files-panels").classList.toggle("files-panels--menu-show");
+    document.querySelector("html").classList.toggle("menu-show");
+};
+
+export const isEmptyObj = function(obj) {
+    return Object.keys(obj).length === 0 || obj === null || obj === undefined
+};
+
+export const onAuthenticated = function (options) {
     if (options.token) {
         options.window.close();
         /// event send to AddDrive.componentDidMount
@@ -10,21 +20,7 @@ utils.onAuthenticated = function (options) {
     }
 };
 
-utils.getAuthInfoFromUrl = function () {
-    if (window.location.hash) {
-        let authResponse = window.location.hash.substring(1);
-        return JSON.parse(
-            '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0, -1) + '}',
-            function (key, value) {
-                return key === "" ? value : decodeURIComponent(value);
-            });
-    }
-    else {
-        alert("failed to receive auth token");
-    }
-};
-
-utils.onAuthCallback = function (type) {
+export const onAuthCallback = function (type) {
     let options = {};
     let authInfo = getAuthInfoFromUrl();
     options.token = authInfo["access_token"];
@@ -36,8 +32,8 @@ utils.onAuthCallback = function (type) {
     }
 
     function getAuthInfoFromUrl() {
-        if (window.location.hash) {
-            let authResponse = window.location.hash.substring(1);
+        if (location.hash) {
+            let authResponse = location.hash.substring(1);
             return JSON.parse(
                 '{' + authResponse.replace(/([^=]+)=([^&]+)&?/g, '"$1":"$2",').slice(0, -1) + '}',
                 function (key, value) {
@@ -51,7 +47,7 @@ utils.onAuthCallback = function (type) {
 };
 
 
-utils.challengeForAuth = function (type = "Error") {
+export const challengeForAuth = function (type = "Error") {
     let appOneDriveInfo = {
         clientId: "144a6c1e-ef29-4128-972f-a3acb7b43da6",
         redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/ODcallback",
@@ -126,5 +122,3 @@ utils.challengeForAuth = function (type = "Error") {
 
     popup(url);
 };
-
-export default utils;

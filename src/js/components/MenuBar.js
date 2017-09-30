@@ -1,6 +1,9 @@
 import React from 'react';
+import {toggleMenu} from '../Utils';
 
 export default function MenuBar() {
+
+
     return (
         <div className="menu-bar">
             <a href="/" className="menu-bar__link">
@@ -8,10 +11,9 @@ export default function MenuBar() {
                 <h1 className="menu-bar__name">Cloud Share</h1>
             </a>
             <button className="menu-bar__menu-button"
-                    onClick={() => document.getElementById("menu").classList.toggle("menu--hide")}>
+                    onClick={() => toggleMenu()}>
                 <i className="fa fa-bars" aria-hidden="true"> </i>
             </button>
-            <div className="clearfix"> </div>
         </div>
     )
 }

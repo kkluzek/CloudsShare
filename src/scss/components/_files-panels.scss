@@ -1,5 +1,13 @@
 .files-panels {
   display: flex;
-  height: calc(100% - 30px);
-  padding: 15px;
+  height: 100%;
+  transition: 2s;
+  @media (max-width: $size-sm) {
+    flex-wrap: wrap;
+  }
+  &--menu-show {
+    @media (max-width: $size-md) {
+      flex-wrap: wrap;
+    }
+  }
 }

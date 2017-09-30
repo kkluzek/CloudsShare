@@ -41,7 +41,8 @@ const FilesPanel = class extends Component {
 
         if (isFolder) {
             return <li key={id} onDoubleClick={() => this.openFolder(fullPathToFolder)} className="files-panel__item">
-                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i><span>{name}</span></li>
+                <i className={"files-panel__icon fa fa-folder"} aria-hidden="true"> </i><span
+                className="files-panel__label">{name}</span></li>
         } else {
             return <li key={id} onDoubleClick={() => downloadFile(downloadUrl)} className="files-panel__item">
                 <i className={"files-panel__icon fa fa-file"} aria-hidden="true"> </i><span

@@ -6,6 +6,7 @@
   &__form {
     width: 100%;
     display: flex;
+    margin: 15px 0;
   }
   &__input {
     width: 100%;
@@ -29,7 +30,7 @@
     border: none;
     color: $text-color;
     font-size: 23px;
-    margin-right: 45px;
+    margin-right: 30px;
     transition: .2s;
     &:hover {
       color: $accent-color;

@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import oneDriveIcon from "../../img/One-Drive-icon.png";
 import dropboxIcon from "../../img/Dropbox-icon.png";
-import {actionAddODToken} from '../actions/OneDriveToken';
-import {actionAddDBToken} from "../actions/DropboxToken";
-// eslint-disable-next-line t
+import {oneDriveAddToken} from '../actions/oneDriveAddToken';
+import {dropboxAddToken} from "../actions/dropboxAddToken";
 import {bindActionCreators} from 'redux';
-// eslint-disable-next-line t
 import {connect} from 'react-redux';
-import utils from "../Utils";
+import {challengeForAuth, isEmptyObj} from "../Utils";
 
 const year = 31536000;//seconds
 
@@ -23,19 +21,26 @@ class AddDrive extends Component {
             this.props.actionAddDBToken(e.detail.token, expiration);
         });
     }
-
+    static isLogin(obj){
+        return !isEmptyObj(obj) &&  <i className="fa fa-check" style={{color: '#90D751'}} aria-hidden="true"> </i>
+    }
 
     render() {
         return (
-            <div className="add-drive__btns">
-                <button onClick={() => utils.challengeForAuth("OneDrive")} className="add-drive__btn btn btn-light"><img
-                    className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span
-                    className="add-drive__btn-text">OneDrive</span>
-                </button>
-                <button onClick={() => utils.challengeForAuth("Dropbox")} className="add-drive__btn btn btn-light"><img
-                    className="add-drive__btn-icon" src={dropboxIcon} alt="OneDrive Icon"/><span
-                    className="add-drive__btn-text">Dropbox</span>
-                </button>
+            <div className="add-drive">
+                <h3>Add new drive</h3>
+                <div className="add-drive__btns">
+                    <button onClick={() => challengeForAuth("OneDrive")} className="add-drive__btn btn btn-light">
+                        <img
+                            className="add-drive__btn-icon" src={oneDriveIcon} alt="OneDrive Icon"/><span
+                        className="add-drive__btn-text">OneDrive {AddDrive.isLogin(this.props.OneDrive)}</span>
+                    </button>
+                    <button onClick={() => challengeForAuth("Dropbox")} className="add-drive__btn btn btn-light">
+                        <img
+                            className="add-drive__btn-icon" src={dropboxIcon} alt="OneDrive Icon"/><span
+                        className="add-drive__btn-text">Dropbox {AddDrive.isLogin(this.props.Dropbox)}</span>
+                    </button>
+                </div>
             </div>
         )
     }
@@ -46,12 +51,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({actionAddODToken, actionAddDBToken}, dispatch);
+    return bindActionCreators({actionAddODToken: oneDriveAddToken, actionAddDBToken: dropboxAddToken}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddDrive);
-
-
-
-
-
