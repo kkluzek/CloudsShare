@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.scss';
 import Menu from './js/components/Menu';
 import HeaderBar from './js/components/HeaderBar';
@@ -20,22 +20,20 @@ import {load, save} from "redux-localstorage-simple";
 
 const createStoreWithMiddleware = applyMiddleware(OneDrive, Dropbox, logger, save())(createStore);
 
-class App extends Component {
-    render() {
-        return (
-            <Provider store={createStoreWithMiddleware(reducers, load())}>
-                <div id="App">
-                    <HeaderBar/>
-                    <BrowserRouter>
-                        <div className="body">
-                            <Menu/>
-                            <Content/>
-                        </div>
-                    </BrowserRouter>
-                </div>
-            </Provider>
-        )
-    }
+function App() {
+    return (
+        <Provider store={createStoreWithMiddleware(reducers, load())}>
+            <div id="App">
+                <HeaderBar/>
+                <BrowserRouter>
+                    <div className="body">
+                        <Menu/>
+                        <Content/>
+                    </div>
+                </BrowserRouter>
+            </div>
+        </Provider>
+    )
 }
 
 /// to fire from Authorization popup window
