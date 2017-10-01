@@ -25,7 +25,7 @@ function App() {
         <Provider store={createStoreWithMiddleware(reducers, load())}>
             <div id="App">
                 <HeaderBar/>
-                <BrowserRouter>
+                <BrowserRouter basename="/clouds">
                     <div className="body">
                         <Menu/>
                         <Content/>
