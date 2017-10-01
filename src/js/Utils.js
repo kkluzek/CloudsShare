@@ -50,14 +50,14 @@ export const onAuthCallback = function (type) {
 export const challengeForAuth = function (type = "Error") {
     let appOneDriveInfo = {
         clientId: "144a6c1e-ef29-4128-972f-a3acb7b43da6",
-        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/ODcallback",
+        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/cloudsshare/ODcallback",
         scopes: "user.read files.read files.read.all sites.read.all",
         authServiceUri: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
     };
 
     let appDropboxInfo = {
         authServiceUri: "https://www.dropbox.com/oauth2/authorize",
-        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/DBcallback",
+        redirectUri: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + "/cloudsshare/DBcallback",
         clientId: "ph4wr4t62mh20rw",
     };
 
