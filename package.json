@@ -1,5 +1,6 @@
 {
   "name": "cloudsshare",
+  "homepage": "https://kkluzek.github.io/clouds",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
